@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane fx:id="ap_root" minHeight="300.0" minWidth="500.0" style="-fx-background-color: transparent;" stylesheets="@style/style.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.centoreluca.controller.ControllerProfileManager">
+    <GridPane styleClass="default-background-orange" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <columnConstraints>
+            <ColumnConstraints hgrow="NEVER" minWidth="125.0" prefWidth="125.0" />
+         <ColumnConstraints hgrow="NEVER" minWidth="125.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="75.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="75.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
+        </rowConstraints>
+        <padding>
+            <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
+        </padding>
+      <Pane opacity="0.2" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: black; -fx-border-radius: 10;" GridPane.columnSpan="2" GridPane.rowIndex="1" GridPane.rowSpan="2">
+         <GridPane.margin>
+            <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+         </GridPane.margin>
+      </Pane>
+      <Pane opacity="0.2" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: black; -fx-border-radius: 10;" GridPane.columnIndex="2" GridPane.rowIndex="1" GridPane.rowSpan="3">
+         <GridPane.margin>
+            <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+         </GridPane.margin>
+      </Pane>
+        <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" text="ADMIN GESTIONE PROFILI" textAlignment="CENTER" GridPane.columnSpan="2147483647">
+            <font>
+                <Font name="System Bold" size="14.0" />
+            </font>
+        </Label>
+        <Button fx:id="b_reset" disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#resetPassword" styleClass="button-orange" text="RESET" textAlignment="CENTER" textFill="#f21f1f" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+         <font>
+             <Font name="System Bold" size="24.0" />
+         </font>
+         <GridPane.margin>
+             <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+         </GridPane.margin>
+        </Button>
+        <Button cancelButton="true" mnemonicParsing="false" onAction="#indietro" styleClass="button-orange" text="Indietro" GridPane.rowIndex="3" GridPane.valignment="BOTTOM">
+         <GridPane.margin>
+             <Insets bottom="8.0" left="8.0" />
+         </GridPane.margin>
+         <font>
+             <Font size="14.0" />
+         </font>
+        </Button>
+        <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#salvaUtente" styleClass="button-orange" text="SALVA UTENTE" GridPane.columnIndex="2" GridPane.rowIndex="3">
+           <GridPane.margin>
+               <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+           </GridPane.margin>
+           <font>
+               <Font size="14.0" />
+           </font>
+        </Button>
+        <TextField fx:id="tf_nuovoUsername" focusTraversable="false" promptText="Inserire nuovo username" styleClass="text-field-orange" GridPane.columnIndex="2" GridPane.rowIndex="1">
+           <opaqueInsets>
+               <Insets />
+           </opaqueInsets>
+           <GridPane.margin>
+               <Insets left="8.0" right="8.0" />
+           </GridPane.margin>
+        </TextField>
+        <PasswordField fx:id="pf_nuovaPassword" focusTraversable="false" promptText="Inserire nuova password" styleClass="text-field-orange" GridPane.columnIndex="2" GridPane.rowIndex="2">
+           <GridPane.margin>
+               <Insets left="8.0" right="8.0" />
+           </GridPane.margin>
+        </PasswordField>
+      <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#modificaNomeUtente" styleClass="button-orange" text="Modifica&#10;nome&#10;utente" textAlignment="CENTER" GridPane.rowIndex="2">
+         <GridPane.margin>
+            <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+         </GridPane.margin>
+      </Button>
+      <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#modificaPassword" styleClass="button-orange" text="Modifica&#10;password" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="2">
+         <GridPane.margin>
+            <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+         </GridPane.margin>
+      </Button>
+      <ToggleButton fx:id="tb_abilitazioneReset" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#abilitaReset" styleClass="button-orange" text="Abilita&#10;RESET" GridPane.rowIndex="1" GridPane.valignment="TOP">
+         <GridPane.margin>
+            <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+         </GridPane.margin>
+      </ToggleButton>
+    </GridPane>
+</AnchorPane>
