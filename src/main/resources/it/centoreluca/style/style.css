@@ -1,0 +1,128 @@
+.field-error {
+	-fx-border-color: red;
+	-fx-border-radius: 5;
+	-fx-border-width: 1.5;
+}
+
+.field-valid {
+	-fx-border-color: green;
+	-fx-border-radius: 5;
+	-fx-border-width: 1.5;
+}
+
+.tooltip-error {
+	-fx-border-color: red;
+	-fx-border-radius: 10;
+	-fx-border-width: 1.5;
+	-fx-background-color: white;
+	-fx-background-radius: 10;
+	-fx-font-size: 12;
+	-fx-text-fill: black;
+}
+
+/* MAIN PANE CYAN */
+.root {
+	-fx-background-color: #85C1E9;
+	-fx-background-radius: 20;
+}
+
+/* DEFAULT BG CYAN */
+.default-background {
+	-fx-background-color: #85C1E9;
+	-fx-background-radius: 20;
+}
+
+/* BUTTON CYAN */
+.button {
+	-fx-background-color: #AED6F1;
+	-fx-background-radius: 30;
+}
+
+/* TEXT FIELD */
+.text-field {
+	-fx-background-color: #AED6F1;
+	-fx-background-radius: 5;
+}
+
+/* COMBO BOX */
+.combo-box {
+	-fx-background-color: #AED6F1;
+	-fx-background-radius: 5;
+}
+.combo-box .combo-box-popup .list-view .list-cell {
+	-fx-background-color: #AED6F1;
+}
+
+/* RADIO BUTTON */
+.radio-button .radio {
+    -fx-background-color: #AED6F1;
+    -fx-background-insets: 0;
+}
+.radio-button:selected .radio .dot {
+    -fx-background-color: black;
+    -fx-background-insets: 0;
+}
+
+/* CHECK BOX */
+.check-box .box  {
+    -fx-background-color: #AED6F1;
+}
+.check-box:selected .box .mark {
+    -fx-background-color: black;
+}
+
+/* TABLE VIEW*/
+.table-view {
+   -fx-background-color: transparent;
+}
+.table-row-cell {
+    -fx-background-color: -fx-table-cell-border-color, #AED6F1;
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-padding: 0.0em;
+}
+.table-row-cell:odd {
+    -fx-background-color: -fx-table-cell-border-color, #C7DEED;
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-padding: 0.0em;
+}
+.table-row-cell:selected {
+    -fx-background-color: #005797;
+    -fx-background-insets: 0;
+    -fx-background-radius: 1;
+}
+
+/* DEFAULT BG ORANGE */
+.default-background-orange {
+	-fx-background-color: #F2A546;
+	-fx-background-radius: 20;
+}
+
+/* BUTTON ORANGE*/
+.button-orange {
+	-fx-background-color: #EBBC83;
+	-fx-background-radius: 30;
+}
+
+/* TEXT FIELD ORANGE */
+.text-field-orange {
+	-fx-background-color: #EBBC83;
+	-fx-background-radius: 5;
+}
+
+/* DEFAULT BG GREEN */
+.default-background-green {
+	-fx-background-color: #85E985;
+	-fx-background-radius: 20;
+}
+
+/* BUTTON GREEN */
+.button-green {
+	-fx-background-color: #AFF1AE;
+	-fx-background-radius: 30;
+}
+
+/* TEXT FIELD GREEN */
+.text-field-green {
+	-fx-background-color: #AFF1AE;
+	-fx-background-radius: 5;
+}
