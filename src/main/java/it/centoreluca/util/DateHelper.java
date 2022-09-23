@@ -5,7 +5,6 @@ import it.centoreluca.models.Manutenzione;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
-
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Locale;
@@ -206,6 +205,11 @@ public class DateHelper {
 
     public String timestamp() {
         Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("Europe/Rome"), Locale.ITALY);
-        return calendar.get(Calendar.DATE) + "-" + calendar.get(Calendar.MONTH) + "-" + calendar.get(Calendar.YEAR) + " " + calendar.get(Calendar.HOUR) + "-" + calendar.get(Calendar.MINUTE);
+        return calendar.get(Calendar.DATE) + "-" + calendar.get(Calendar.MONTH) + "-" + calendar.get(Calendar.YEAR) + " " + calendar.get(Calendar.HOUR_OF_DAY) + "-" + calendar.get(Calendar.MINUTE);
+    }
+
+    public String getMonthYear() {
+        Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("Europe/Rome"), Locale.ITALY);
+        return Mesi.values()[calendar.get(Calendar.MONTH)] + "_" + calendar.get(Calendar.YEAR);
     }
 }

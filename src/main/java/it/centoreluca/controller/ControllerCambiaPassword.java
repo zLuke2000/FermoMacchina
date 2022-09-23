@@ -14,12 +14,13 @@ public class ControllerCambiaPassword extends Controller {
     @FXML private PasswordField pf_nuovaPassword1;
     @FXML private PasswordField pf_nuovaPassword2;
 
-    private ControllerAccesso parent;
-    private Stage stage;
     private final Auth auth = Auth.getInstance();
     private final CssHelper css = CssHelper.getInstance();
+    private Stage stage;
+    private ControllerProfileManager parent;
 
-    @FXML void conferma() {
+    @FXML
+    void conferma() {
         switch(auth.aggiornamentoPassword(tf_username.getText().trim(), pf_nuovaPassword1.getText().trim(), pf_nuovaPassword2.getText().trim())) {
             case 0:
                 css.toError(tf_username, new Tooltip("Operatore inesistente"));
@@ -40,13 +41,15 @@ public class ControllerCambiaPassword extends Controller {
         }
     }
 
-    @FXML void indietro() {
+    @FXML
+    void indietro() {
         stage.close();
         parent.defaultOpacity();
     }
 
-    @Override public void initParameter(Controller parentController, Stage stage, String operatore, int param) {
-        this.parent = (ControllerAccesso) parentController;
+    @Override
+    public void initParameter(Controller parentController, Stage stage, int param) {
+        this.parent = (ControllerProfileManager) parentController;
         this.stage = stage;
     }
 }

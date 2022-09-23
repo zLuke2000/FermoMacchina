@@ -7,8 +7,7 @@ plugins {
 }
 
 mainClassName = "it.centoreluca.Main"
-group 'it.centoreluca'
-version '1.0'
+version = '1.0.1'
 
 repositories {
     mavenCentral()
@@ -26,20 +25,20 @@ javafx {
 
 dependencies {
     implementation 'net.sf.ucanaccess:ucanaccess:5.0.1'
+    implementation 'org.apache.logging.log4j:log4j-core:2.17.1'
     implementation 'org.apache.poi:poi:5.2.0'
     implementation 'org.apache.poi:poi-ooxml:5.2.0'
 
     shadow 'org.apache.poi:poi:5.2.0'
     shadow 'org.apache.poi:poi-ooxml:5.2.0'
-    shadow 'org.apache.logging.log4j:log4j-core:2.17.0'
-    shadow 'org.slf4j:slf4j-simple:1.7.35'
-}
-
-test {
-    useJUnitPlatform()
+    shadow 'org.apache.logging.log4j:log4j-core:2.17.1'
+    shadow 'org.slf4j:slf4j-simple:1.7.36'
 }
 
 launch4j {
+    companyName = 'centore luca'
+    copyright = 'centore luca'
+    version = '1.0.1'
     icon = "${projectDir}/src/main/resources/it/centoreluca/icon/icon.ico"
     jarTask = project.tasks.shadowJar
 }

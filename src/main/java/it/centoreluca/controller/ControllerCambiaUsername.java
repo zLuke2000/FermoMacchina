@@ -15,9 +15,10 @@ public class ControllerCambiaUsername extends Controller {
     private Stage stage;
     private final Auth auth = Auth.getInstance();
     private final CssHelper css = CssHelper.getInstance();
-    private ControllerAccesso parent;
+    private ControllerProfileManager parent;
 
-    @FXML void conferma() {
+    @FXML
+    void conferma() {
         switch(auth.aggiornamentoNome(tf_vecchioUsername.getText().trim(), tf_nuovoUsername.getText().trim())) {
             case 0:
                 css.toError(tf_vecchioUsername, new Tooltip("Utente inesistente"));
@@ -37,15 +38,16 @@ public class ControllerCambiaUsername extends Controller {
         }
     }
 
-
-    @FXML void indietro() {
+    @FXML
+    void indietro() {
         stage.close();
         parent.defaultOpacity();
     }
 
 
-    @Override public void initParameter(Controller parentController, Stage stage, String operatore, int param) {
-        this.parent = (ControllerAccesso) parentController;
+    @Override
+    public void initParameter(Controller parentController, Stage stage, int param) {
+        this.parent = (ControllerProfileManager) parentController;
         this.stage = stage;
     }
 }

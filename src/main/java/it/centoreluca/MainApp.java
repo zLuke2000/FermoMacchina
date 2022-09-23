@@ -15,24 +15,26 @@ import java.util.Objects;
 public class MainApp extends Application {
 
     private static FXMLLoader fxmlLoader;
-    private static final Double aWidth = 600.0;     // Avvio
-    private static final Double aHeight = 300.0;    // Avvio
+    private static final Double aWidth = 496.0;     // Avvio
+    private static final Double aHeight = 366.0;    // Avvio
     private static final Double nmWidth = 1100.0;   // Nuova Manutenzione
     private static final Double nmHeight = 400.0;   // Nuova Manutenzione
     private static final Double tmmWidth = 800.0;   // Tabella Manutenzione Macchine
     private static final Double tmmHeight = 500.0;  // Tabella Manutenzione Macchine
 
+    public static String operatore;
     public static Stage stage;
     private static Scene scene;
     private Double xOffset;
     private Double yOffset;
     private static Double width = aWidth;
     private static Double height = aHeight;
+    private boolean drag;
 
     @Override
     public void start(Stage stage) {
         MainApp.stage = stage;
-        scene = new Scene(Objects.requireNonNull(loadFXML("Avvio")));
+        scene = new Scene(Objects.requireNonNull(loadFXML("AccessoDialog")));
         stage.initStyle(StageStyle.TRANSPARENT);
         stage.setScene(scene);
         scene.setFill(Color.TRANSPARENT);
@@ -44,14 +46,17 @@ public class MainApp extends Application {
         scene.setOnMousePressed(mouseEvent -> {
             xOffset = mouseEvent.getSceneX();
             yOffset = mouseEvent.getSceneY();
+            drag = yOffset < 45;
         });
         scene.setOnMouseDragged(mouseEvent -> {
-            stage.setX(mouseEvent.getScreenX() - xOffset);
-            stage.setY(mouseEvent.getScreenY() - yOffset);
+            if(drag) {
+                stage.setX(mouseEvent.getScreenX() - xOffset);
+                stage.setY(mouseEvent.getScreenY() - yOffset);
+            }
         });
     }
 
-    public static void setRoot(String fxml, int param, String operatore) {
+    public static void setRoot(String fxml, int param) {
         scene.setRoot(loadFXML(fxml));
         Controller c = fxmlLoader.getController();
         switch (fxml) {
@@ -60,15 +65,15 @@ public class MainApp extends Application {
                 width = aWidth;
                 height = aHeight;
                 break;
-            case "NuovaManutenzione":
-                stage.setTitle("PRODUZIONE - Manutenzione macchine");
-                c.initParameter(null, null, operatore, -1);
+            case "CambioFiltri":
+                stage.setTitle("PRODUZIONE - Cambio filtri");
+                c.initParameter(null, null, -1);
                 width = nmWidth;
                 height = nmHeight;
                 break;
-            case "TabellaManutenzioni":
-                stage.setTitle("PRODUZIONE - Tabella manutenzione macchine");
-                c.initParameter(null, null, operatore, param);
+            case "TabellaCambioFiltri":
+                stage.setTitle("PRODUZIONE - Tabella cambio filtri");
+                c.initParameter(null, null, param);
                 width = tmmWidth;
                 height = tmmHeight;
                 break;

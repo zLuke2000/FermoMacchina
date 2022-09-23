@@ -6,6 +6,7 @@ import it.centoreluca.util.DialogHelper;
 import javafx.animation.FadeTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -13,35 +14,42 @@ import javafx.util.Duration;
 public class ControllerAvvio extends Controller {
 
     @FXML private AnchorPane ap_root;
+    @FXML private Button b_gestioneProfili;
 
-    private final DialogHelper dh = DialogHelper.getInstance();
+    private final DialogHelper dh = new DialogHelper();
     private final Database db = Database.getInstance();
 
-    @FXML void manutenzioneMacchine() {
-        dh.newDialog("Accesso","AccessoDialog", ap_root, this, "");
+    @Override
+    public void initParameter(Controller parentController, Stage stage, int param) {
+        if(MainApp.operatore.equals("admin")) {
+            b_gestioneProfili.setVisible(true);
+        }
     }
 
-    @FXML void ricevimentoLotti() {
-        MainApp.setRoot("RicevimentoLotti", -1, null);
+    @Override
+    public void defaultOpacity() {
+        FadeTransition ft = new FadeTransition(new Duration(2000), ap_root);
+        ft.setFromValue(0.1);
+        ft.setToValue(1.0);
+        ft.play();
     }
 
-    @FXML void exit() {
+    @FXML
+    private void manutenzioneMacchine() { MainApp.setRoot("CambioFiltri", -1); }
+
+    @FXML
+    private void ricevimentoLotti() { MainApp.setRoot("RicevimentoLotti", -1); }
+
+    @FXML
+    private void apriDialogProfili() {
+        dh.newDialog("Admin profili","ProfileManager", ap_root, this);
+    }
+
+    @FXML
+    void exit() {
         db.close();
         Platform.exit();
         System.exit(0);
     }
-
-    void callback(boolean status, String operatore) {
-        if(status) {
-            MainApp.setRoot("NuovaManutenzione", -1, operatore);
-        } else {
-            FadeTransition ft = new FadeTransition(new Duration(2000), ap_root);
-            ft.setFromValue(0.1);
-            ft.setToValue(1.0);
-            ft.play();
-        }
-    }
-
-    @Override public void initParameter(Controller parentController, Stage stage, String operatore, int param) { }
 
 }

@@ -3,14 +3,11 @@ package it.centoreluca.database;
 import it.centoreluca.MainApp;
 import it.centoreluca.enumerator.Macchine;
 import it.centoreluca.models.Manutenzione;
+import it.centoreluca.util.DateHelper;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.StandardCopyOption;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,30 +15,34 @@ import java.util.Objects;
 
 public class Database {
 
-    private static final String path = System.getProperty("user.dir") + "/Manutenzione.accdb";
-    private final static String url = "jdbc:ucanaccess://" + path;
+    private static String path = System.getProperty("user.dir") + "/Manutenzione_";
+    private static final String ext = ".accdb";
+    private final static String url = "jdbc:ucanaccess://";
     private static Connection con;
     private static Statement st;
+
     private static Database instance = null;
 
     private Database() {
+        DateHelper dateHelper = DateHelper.getInstance();
+        path += dateHelper.getMonthYear() + ext;
         if(Files.notExists(Path.of(path))) {
             try {
                 Files.copy(Objects.requireNonNull(MainApp.class.getResourceAsStream("database/Manutenzione.accdb")), Path.of(path));
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        } else {
-            try {
-                Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
-                con = DriverManager.getConnection(url);
-                st = con.createStatement();
-            } catch (SQLException e) {
-                System.err.println("[sql] ->" + e);
-            } catch (ClassNotFoundException e) {
-                System.err.println("[class] ->" + e);
-            }
         }
+        try {
+            Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+            con = DriverManager.getConnection(url + path);
+            st = con.createStatement();
+        } catch (SQLException e) {
+            System.err.println("[sql] -> " + e);
+        } catch (ClassNotFoundException e) {
+            System.err.println("[class] -> " + e);
+        }
+        System.out.println("[con] -> " + con);
     }
 
     public static Database getInstance() {

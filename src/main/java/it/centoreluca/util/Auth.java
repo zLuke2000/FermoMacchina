@@ -9,7 +9,6 @@ public class Auth {
     private Preferences auth;
 
     private Auth() {
-        /*
         auth = Preferences.userRoot().node("ADMIN");
         try {
             auth.clear();
@@ -17,7 +16,6 @@ public class Auth {
             e.printStackTrace();
         }
         auth.put("admin", "pYg4u4EpNs80qPfu");
-        */
         auth = Preferences.userRoot().node("AUTH");
     }
 
@@ -72,7 +70,7 @@ public class Auth {
     /**
      * @param username username operatore
      * @param password password operatore
-     * @return 0 auth failed, 1 ok, 2 username not found, 3 reset
+     * @return 0 auth ok, 1 wrong password, 2 username not found, 3 admin
      */
     public int autenticazione(String username, String password) {
         // ADMIN
@@ -84,9 +82,9 @@ public class Auth {
         auth = Preferences.userRoot().node("AUTH");
         if(!auth.get(username, "").equals("")) {
             if(auth.get(username, "").equals(password)) {
-                return 1;
+                return 0;
             }
-            return 0;
+            return 1;
         }
         return 2;
     }

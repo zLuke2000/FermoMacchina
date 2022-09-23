@@ -4,7 +4,6 @@ import it.centoreluca.MainApp;
 import it.centoreluca.enumerator.Macchine;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-
 import java.util.Objects;
 
 public class Manutenzione {

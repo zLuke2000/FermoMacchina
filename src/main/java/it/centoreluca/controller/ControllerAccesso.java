@@ -1,16 +1,13 @@
 package it.centoreluca.controller;
 
+import it.centoreluca.MainApp;
 import it.centoreluca.util.CssHelper;
-import it.centoreluca.util.DialogHelper;
 import it.centoreluca.util.Auth;
-import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
-import javafx.util.Duration;
 
 public class ControllerAccesso extends Controller {
 
@@ -20,47 +17,33 @@ public class ControllerAccesso extends Controller {
 
     private final Auth auth = Auth.getInstance();
     private final CssHelper cssHelper = CssHelper.getInstance();
-    private final DialogHelper dh = DialogHelper.getInstance();
-    private ControllerAvvio parent;
-    private Stage stage;
 
-    @FXML void Accesso() {
+    /*
+     * case 0 e 3: Autenticazione livello 1 e 2
+     * case 1: Password errata
+     * case 2: Username non trovato
+     */
+    @FXML
+    void Accesso() {
         switch (auth.autenticazione(tf_username.getText().trim(), pf_password.getText().trim())) {
             case 0:
-                cssHelper.toError(pf_password, new Tooltip("Password errata"));
-                cssHelper.toDefault(tf_username);
+            case 3:
+                MainApp.operatore = tf_username.getText().trim();
+                MainApp.setRoot("Avvio", -1);
                 break;
             case 1:
+                cssHelper.toError(pf_password, new Tooltip("Password errata"));
                 cssHelper.toDefault(tf_username);
-                cssHelper.toDefault(pf_password);
-                parent.callback(true, tf_username.getText().trim());
-                stage.close();
                 break;
             case 2:
                 cssHelper.toError(tf_username, new Tooltip("Username non trovato"));
                 cssHelper.toDefault(pf_password);
                 break;
-            case 3:
-                dh.newDialog("Admin profili","ProfileManager", ap_root, this, tf_username.getText().trim());
-                break;
         }
     }
 
-    @FXML void indietro() {
-        parent.callback(false, "");
-        stage.close();
+    @FXML
+    void chiudi() {
+        MainApp.stage.close();
     }
-
-    @Override public void initParameter(Controller parentController, Stage stage, String operatore, int param) {
-        this.parent = (ControllerAvvio) parentController;
-        this.stage = stage;
-    }
-
-    public void defaultOpacity() {
-        FadeTransition ft = new FadeTransition(new Duration(2000), ap_root);
-        ft.setFromValue(0.1);
-        ft.setToValue(1.0);
-        ft.play();
-    }
-
 }

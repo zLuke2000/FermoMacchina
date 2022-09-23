@@ -27,15 +27,14 @@ public class ControllerTabella extends Controller {
     @FXML private TableColumn<Manutenzione, ImageView> tc_filtro2;
     @FXML private TableColumn<Manutenzione, String> tc_operatore;
     @FXML private CheckBox cb_abilitazione;
-    @FXML private Label l_abilitazione;
     @FXML private Label l_avvertenza;
 
     private final Database db = Database.getInstance();
     private final ObservableList<Manutenzione> listaManutenzioni = FXCollections.observableArrayList();
-    private int macchinaSelezionata = -1;
-    private String operatore;
+    private int macchina = -1;
 
-    @FXML void initialize() {
+    @FXML
+    private void initialize() {
         tc_id.setCellValueFactory(new PropertyValueFactory<>("id"));
         tc_nome.setCellValueFactory(new PropertyValueFactory<>("macchina"));
         tc_data.setCellValueFactory(new PropertyValueFactory<>("data"));
@@ -44,11 +43,13 @@ public class ControllerTabella extends Controller {
         tc_operatore.setCellValueFactory(new PropertyValueFactory<>("operatore"));
     }
 
-    @FXML private void indietro() {
-            MainApp.setRoot("NuovaManutenzione", -1, operatore);
+    @FXML
+    private void indietro() {
+            MainApp.setRoot("CambioFiltri", -1);
     }
 
-    @FXML private void click(Event e) {
+    @FXML
+    private void click(Event e) {
         if(cb_abilitazione.isSelected()) {
             int id = -1;
             try {
@@ -64,31 +65,30 @@ public class ControllerTabella extends Controller {
                 }
                 System.out.println(id);
             } catch (Exception ignored) { }
-            db.cancellaManutenzione(macchinaSelezionata, id);
+            db.cancellaManutenzione(macchina, id);
             listaManutenzioni.clear();
-            listaManutenzioni.addAll(db.getManutenzioni(macchinaSelezionata));
+            listaManutenzioni.addAll(db.getManutenzioni(macchina));
             tv_tabella.setItems(listaManutenzioni);
             tv_tabella.refresh();
         }
     }
 
-    @FXML private void abilitaEliminazione() {
+    @FXML
+    private void abilitaEliminazione() {
         l_avvertenza.setVisible(cb_abilitazione.isSelected());
     }
 
-    @Override public void initParameter(Controller parentController, Stage stage, String operatore, int param) {
-        this.operatore = operatore;
-        macchinaSelezionata = param;
-        if(macchinaSelezionata == 0) {
+    @Override
+    public void initParameter(Controller parentController, Stage stage, int macchina) {
+        this.macchina = macchina;
+        if(this.macchina == 0) {
             l_nomeMacchina.setText(Arrays.toString(Macchine.values()));
-            l_abilitazione.setVisible(false);
             cb_abilitazione.setVisible(false);
-            cb_abilitazione.setDisable(true);
         } else {
-            l_nomeMacchina.setText(String.valueOf(Macchine.values()[macchinaSelezionata - 1]));
+            l_nomeMacchina.setText(String.valueOf(Macchine.values()[this.macchina - 1]));
         }
         listaManutenzioni.clear();
-        listaManutenzioni.addAll(db.getManutenzioni(macchinaSelezionata));
+        listaManutenzioni.addAll(db.getManutenzioni(this.macchina));
         tv_tabella.setItems(listaManutenzioni);
     }
 }
