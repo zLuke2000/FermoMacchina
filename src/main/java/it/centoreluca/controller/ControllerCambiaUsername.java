@@ -15,7 +15,7 @@ public class ControllerCambiaUsername extends Controller {
     private Stage stage;
     private final Auth auth = Auth.getInstance();
     private final CssHelper css = CssHelper.getInstance();
-    private ControllerProfileManager parent;
+    private ControllerAppManager parent;
 
     @FXML
     void conferma() {
@@ -47,7 +47,7 @@ public class ControllerCambiaUsername extends Controller {
 
     @Override
     public void initParameter(Controller parentController, Stage stage, int param) {
-        this.parent = (ControllerProfileManager) parentController;
+        this.parent = (ControllerAppManager) parentController;
         this.stage = stage;
     }
 }

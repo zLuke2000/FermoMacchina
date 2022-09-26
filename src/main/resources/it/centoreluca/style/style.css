@@ -107,6 +107,7 @@
 .text-field-orange {
 	-fx-background-color: #EBBC83;
 	-fx-background-radius: 5;
+	-fx-prompt-text-fill: dimgray;
 }
 
 /* DEFAULT BG GREEN */
@@ -125,4 +126,10 @@
 .text-field-green {
 	-fx-background-color: #AFF1AE;
 	-fx-background-radius: 5;
+}
+
+/* BORDO */
+.bordo {
+-fx-border-color: sienna;
+-fx-border-radius: 10;
 }

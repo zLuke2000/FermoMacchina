@@ -65,8 +65,8 @@
             <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
          </GridPane.margin>
       </Button>
-      <CheckBox fx:id="cb_filtro1" text="Filtro 1 SX" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-      <CheckBox fx:id="cb_filtro2" text="Filtro 2 DX" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+      <CheckBox fx:id="cb_filtro1" text="Filtro 1 (SX)" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+      <CheckBox fx:id="cb_filtro2" text="Filtro 2 (DX)" GridPane.columnIndex="2" GridPane.rowIndex="2" />
       <Label text="Filtro:" GridPane.halignment="CENTER" GridPane.rowIndex="2">
          <font>
             <Font name="System Bold" size="14.0" />

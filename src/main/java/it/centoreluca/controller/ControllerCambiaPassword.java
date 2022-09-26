@@ -17,7 +17,7 @@ public class ControllerCambiaPassword extends Controller {
     private final Auth auth = Auth.getInstance();
     private final CssHelper css = CssHelper.getInstance();
     private Stage stage;
-    private ControllerProfileManager parent;
+    private ControllerAppManager parent;
 
     @FXML
     void conferma() {
@@ -49,7 +49,7 @@ public class ControllerCambiaPassword extends Controller {
 
     @Override
     public void initParameter(Controller parentController, Stage stage, int param) {
-        this.parent = (ControllerProfileManager) parentController;
+        this.parent = (ControllerAppManager) parentController;
         this.stage = stage;
     }
 }

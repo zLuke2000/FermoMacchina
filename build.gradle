@@ -36,6 +36,7 @@ dependencies {
 }
 
 launch4j {
+    outfile = 'Produzione' + '.exe'
     companyName = 'centore luca'
     copyright = 'centore luca'
     version = '1.0.1'

@@ -7,6 +7,7 @@ import it.centoreluca.enumerator.Mesi;
 import it.centoreluca.models.Manutenzione;
 import it.centoreluca.util.DateHelper;
 import it.centoreluca.util.ExcelHelper;
+import it.centoreluca.util.Impostazioni;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
@@ -107,7 +108,9 @@ public class ControllerCambioFiltro extends Controller {
 
     @FXML
     private void esportaExcel() {
-        String path = "D:/SSD/Desktop/ManutenzioneMacchine " + dateHelper.timestamp() + ".xlsx";
+        Impostazioni imp = new Impostazioni();
+        String path = imp.leggiImpostazione("excelPath") + "\\" + dateHelper.timestamp() + ".xlsx";
+        System.out.println(path);
         file = new File(path);
         if(excelHelper.esportaXLSX(db.getManutenzioni(0), file)) {
             b_visualizzaExcel.setText("Manutenzione salvata correttamente in: " + path + "\nPremere QUI per aprire il file");

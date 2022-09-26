@@ -8,7 +8,6 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 import javafx.util.Duration;
 
 public class ControllerAvvio extends Controller {
@@ -19,10 +18,11 @@ public class ControllerAvvio extends Controller {
     private final DialogHelper dh = new DialogHelper();
     private final Database db = Database.getInstance();
 
-    @Override
-    public void initParameter(Controller parentController, Stage stage, int param) {
+    @FXML
+    private void initialize() {
         if(MainApp.operatore.equals("admin")) {
             b_gestioneProfili.setVisible(true);
+            b_gestioneProfili.setDisable(false);
         }
     }
 
@@ -42,7 +42,7 @@ public class ControllerAvvio extends Controller {
 
     @FXML
     private void apriDialogProfili() {
-        dh.newDialog("Admin profili","ProfileManager", ap_root, this);
+        dh.newDialog("Admin applicazione","AppManager", ap_root, this);
     }
 
     @FXML

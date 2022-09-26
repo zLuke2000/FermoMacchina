@@ -3,16 +3,25 @@ package it.centoreluca.controller;
 import it.centoreluca.util.CssHelper;
 import it.centoreluca.util.DialogHelper;
 import it.centoreluca.util.Auth;
+import it.centoreluca.util.Impostazioni;
 import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import java.awt.*;
+import java.io.File;
+import java.io.IOException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-public class ControllerProfileManager extends Controller {
+public class ControllerAppManager extends Controller {
 
+    public TextField tf_percorsoExcel;
     @FXML private AnchorPane ap_root;
     @FXML private Button b_reset;
     @FXML private ToggleButton tb_abilitazioneReset;
@@ -24,11 +33,17 @@ public class ControllerProfileManager extends Controller {
     private final Auth auth = Auth.getInstance();
     private final CssHelper css = CssHelper.getInstance();
     private final DialogHelper dh = new DialogHelper();
+    private final Impostazioni imp = new Impostazioni();
 
     @Override
     public void initParameter(Controller parentController, Stage stage, int param) {
         this.parent = parentController;
         this.stage = stage;
+    }
+
+    @FXML
+    private void initialize() {
+        tf_percorsoExcel.setText(imp.leggiImpostazione("excelPath"));
     }
 
     @FXML
@@ -62,12 +77,6 @@ public class ControllerProfileManager extends Controller {
     }
 
     @FXML
-    private void indietro() {
-        stage.close();
-        parent.defaultOpacity();
-    }
-
-    @FXML
     private void modificaNomeUtente() {
         dh.newDialog("Admin profili - Username","CambiaUsernameDialog", ap_root, this);
     }
@@ -89,6 +98,28 @@ public class ControllerProfileManager extends Controller {
         }
     }
 
+    @FXML
+    private void controlloRealtime() {
+        Pattern pattern = Pattern.compile("[A-Z]:(\\\\(.+))*");
+        Matcher matcher = pattern.matcher(tf_percorsoExcel.getText().trim());
+        if(matcher.find()) {
+            imp.aggiornaImpostazione("excelPath", tf_percorsoExcel.getText().trim());
+            css.toValid(tf_percorsoExcel);
+        } else {
+            css.toError(tf_percorsoExcel, new Tooltip("Percorso non conforme"));
+        }
+    }
+
+    @FXML
+    private void apriPercorsoExcel() {
+        File directory = new File(tf_percorsoExcel.getText().trim());
+        try {
+            Desktop.getDesktop().open(directory);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     @Override
     public void defaultOpacity() {
         FadeTransition ft = new FadeTransition(new Duration(2000), ap_root);
@@ -96,4 +127,11 @@ public class ControllerProfileManager extends Controller {
         ft.setToValue(1.0);
         ft.play();
     }
+
+    @FXML
+    private void indietro() {
+        stage.close();
+        parent.defaultOpacity();
+    }
+
 }
